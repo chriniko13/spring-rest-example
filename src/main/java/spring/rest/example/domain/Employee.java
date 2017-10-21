@@ -3,6 +3,7 @@ package spring.rest.example.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -14,6 +15,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "employee")
+
+
+@NamedQueries(
+
+        @NamedQuery(name = "Employee.findAll", query = "select e from Employee as e")
+
+)
+
 public class Employee {
 
     @Id
@@ -23,6 +32,8 @@ public class Employee {
     private String firstname;
     private String initials;
     private String surname;
+
+    private Instant creationDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Department department;

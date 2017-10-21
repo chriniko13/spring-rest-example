@@ -3,6 +3,7 @@ package spring.rest.example.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.List;
 
 @Getter
@@ -15,6 +16,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "department")
+
+@NamedQueries(
+
+        @NamedQuery(name = "Department.findAll", query = "select d from Department as d")
+
+)
+
 public class Department {
 
     @Id
@@ -23,10 +31,10 @@ public class Department {
 
     private String name;
 
+    private Instant creationDate;
+
     @OneToMany(
             mappedBy = "department",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
             fetch = FetchType.EAGER
     )
     private List<Employee> employees;

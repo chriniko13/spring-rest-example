@@ -1,0 +1,9 @@
+
+NOTES
+
+
+0) add jacoco plugin    [TODO]
+1) add error handling   [TODO]
+2) unit tests           [TODO]
+3) functional tests     [TODO]
+4) logback, log support [TODO]

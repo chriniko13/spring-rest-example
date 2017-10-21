@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.*;
 import spring.rest.example.domain.Employee;
 import spring.rest.example.service.EmployeeService;
 
-import java.util.List;
+import java.util.Collection;
 
 @RestController
-@RequestMapping("/resource")
+@RequestMapping("/resources")
 public class EmployeeResource {
 
     private final EmployeeService employeeService;
@@ -24,7 +24,7 @@ public class EmployeeResource {
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.GET)
-    public List<Employee> list() {
+    public Collection<Employee> list() {
         return employeeService.list();
     }
 

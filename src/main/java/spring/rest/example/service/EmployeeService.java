@@ -2,13 +2,13 @@ package spring.rest.example.service;
 
 import spring.rest.example.domain.Employee;
 
-import java.util.List;
+import java.util.Collection;
 
 public interface EmployeeService {
 
     void save(Employee employee);
 
-    List<Employee> list();
+    Collection<Employee> list();
 
     Employee find(Long id);
 
