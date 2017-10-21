@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		">
+
+
+    <!-- START: JPA Support (Hibernate impl) -->
+    <!-- Configure the data source bean -->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- Configure the entity manager factory bean -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+
+        <!--<property name="jpaDialect" value="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>-->
+
+        <!--<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>-->
+
+        <property name="persistenceProviderClass" value="org.hibernate.jpa.HibernatePersistenceProvider"/>
+
+        <property name="dataSource" ref="dataSource"/>
+
+        <property name="packagesToScan" value="spring.rest.example.domain"/>
+
+        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <!--
+                    validate: validate the schema, makes no changes to the database.
+                    update: update the schema.
+                    create: creates the schema, destroying previous data.
+                    create-drop: drop the schema when the SessionFactory is closed explicitly, typically when the application is stopped.
+                -->
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+            </props>
+        </property>
+
+    </bean>
+
+    <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+        <property name="database" value="MYSQL"/>
+        <property name="showSql" value="true"/>
+        <property name="generateDdl" value="true"/>
+        <property name="prepareConnection" value="true"/>
+    </bean>
+
+    <!-- END: JPA Support (Hibernate impl) -->
+
+
+    <!-- START: Transactions Support -->
+    <!-- Configure the transaction manager bean -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <!-- enable the configuration of transactional behavior based on annotations -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- END: Transactions Support -->
+
+
+</beans>
