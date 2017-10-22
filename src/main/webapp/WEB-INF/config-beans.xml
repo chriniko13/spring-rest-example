@@ -16,33 +16,14 @@
     <!-- Scan for all of Spring components such as Spring Service -->
     <context:component-scan base-package="spring.rest.example"/>
 
-    <mvc:annotation-driven/>
-
     <!-- activate properties -->
     <context:property-placeholder location="classpath:application.properties"/>
-
 
     <!-- Start: declare your util beans here -->
     <bean id="modelMapper" class="org.modelmapper.ModelMapper"/>
     <!-- End: declare your util beans here -->
 
-
-    <!-- Configure to plugin JSON as request and response in method handler -->
-    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
-        <!--<property name="messageConverters">-->
-            <!--<list>-->
-                <!--<ref bean="jsonMessageConverter"/>-->
-                <!--<ref bean="xmlMessageConverter"/>-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
-
-    <!--&lt;!&ndash; Configure bean to convert JSON to POJO and vice versa &ndash;&gt;-->
-    <!--<bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
-    <!--</bean>-->
-
-    <!--<bean id="xmlMessageConverter" class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter">-->
-    <!--</bean>-->
-
+    <!-- Enables features suck as the registration of message converters for the Jackson framework, otherwise we need to declare them, see NOTE1 -->
+    <mvc:annotation-driven/>
 
 </beans>
