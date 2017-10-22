@@ -19,11 +19,11 @@
     <!-- activate properties -->
     <context:property-placeholder location="classpath:application.properties"/>
 
+    <!-- Enables features suck as the registration of message converters for the Jackson framework, otherwise we need to declare them, see NOTE1 -->
+    <mvc:annotation-driven/>
+
     <!-- Start: declare your util beans here -->
     <bean id="modelMapper" class="org.modelmapper.ModelMapper"/>
     <!-- End: declare your util beans here -->
-
-    <!-- Enables features suck as the registration of message converters for the Jackson framework, otherwise we need to declare them, see NOTE1 -->
-    <mvc:annotation-driven/>
 
 </beans>

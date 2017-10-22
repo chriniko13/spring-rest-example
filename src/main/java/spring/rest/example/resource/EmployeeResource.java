@@ -25,7 +25,10 @@ public class EmployeeResource {
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.POST)
-    public void save(@RequestBody Employee employee) {
+    public void save(@RequestBody EmployeeDto employeeDto) {
+
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+
         employeeService.save(employee);
     }
 
@@ -49,7 +52,10 @@ public class EmployeeResource {
     }
 
     @RequestMapping(value = "/employees", method = RequestMethod.PUT)
-    public void update(@RequestBody Employee employee) {
+    public void update(@RequestBody EmployeeDto employeeDto) {
+
+        Employee employee = modelMapper.map(employeeDto, Employee.class);
+
         employeeService.update(employee);
     }
 

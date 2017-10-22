@@ -25,7 +25,10 @@ public class DepartmentResource {
     }
 
     @RequestMapping(value = "/departments", method = RequestMethod.POST)
-    public void save(@RequestBody Department department) {
+    public void save(@RequestBody DepartmentDto departmentDto) {
+
+        Department department = modelMapper.map(departmentDto, Department.class);
+
         departmentService.save(department);
     }
 
@@ -47,7 +50,9 @@ public class DepartmentResource {
     }
 
     @RequestMapping(value = "/departments", method = RequestMethod.PUT)
-    public void update(@RequestBody Department department) {
+    public void update(@RequestBody DepartmentDto departmentDto) {
+        Department department = modelMapper.map(departmentDto, Department.class);
+
         departmentService.update(department);
     }
 
