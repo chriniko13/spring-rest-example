@@ -1,10 +1,14 @@
 package spring.rest.example.resource;
 
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import spring.rest.example.domain.Department;
+import spring.rest.example.dto.DepartmentDto;
 import spring.rest.example.service.DepartmentService;
 
+import java.lang.reflect.Type;
 import java.util.Collection;
 
 @RestController
@@ -12,10 +16,12 @@ import java.util.Collection;
 public class DepartmentResource {
 
     private final DepartmentService departmentService;
+    private final ModelMapper modelMapper;
 
     @Autowired
-    public DepartmentResource(DepartmentService departmentService) {
+    public DepartmentResource(DepartmentService departmentService, ModelMapper modelMapper) {
         this.departmentService = departmentService;
+        this.modelMapper = modelMapper;
     }
 
     @RequestMapping(value = "/departments", method = RequestMethod.POST)
@@ -24,13 +30,20 @@ public class DepartmentResource {
     }
 
     @RequestMapping(value = "/departments", method = RequestMethod.GET)
-    public Collection<Department> list() {
-        return departmentService.list();
+    public Collection<DepartmentDto> list() {
+
+        Collection<Department> departments = departmentService.list();
+        Type listType = new TypeToken<Collection<DepartmentDto>>() {
+        }.getType();
+
+        return modelMapper.map(departments, listType);
     }
 
     @RequestMapping(value = "/departments/{departmentId}", method = RequestMethod.GET)
-    public Department find(@PathVariable("departmentId") Long id) {
-        return departmentService.find(id);
+    public DepartmentDto find(@PathVariable("departmentId") Long id) {
+
+        Department department = departmentService.find(id);
+        return modelMapper.map(department, DepartmentDto.class);
     }
 
     @RequestMapping(value = "/departments", method = RequestMethod.PUT)

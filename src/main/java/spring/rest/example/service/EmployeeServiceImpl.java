@@ -2,10 +2,18 @@ package spring.rest.example.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import spring.rest.example.domain.Employee;
 import spring.rest.example.repository.EmployeeRepository;
 
 import java.util.Collection;
+
+@Transactional(
+        propagation = Propagation.REQUIRES_NEW,
+        isolation = Isolation.REPEATABLE_READ
+)
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {

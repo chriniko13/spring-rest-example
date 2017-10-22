@@ -31,6 +31,13 @@
 
     <dependencies>
 
+        <!-- Model Mapper -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
         <!-- Spring Web Mvc -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -106,7 +113,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>4.3.11.RELEASE</version>
+            <version>4.3.12.RELEASE</version>
         </dependency>
 
         <!-- Hibernate Core -->

@@ -33,10 +33,7 @@ public class Department {
 
     private Instant creationDate;
 
-    @OneToMany(
-            mappedBy = "department",
-            fetch = FetchType.EAGER
-    )
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Employee> employees;
 
 }

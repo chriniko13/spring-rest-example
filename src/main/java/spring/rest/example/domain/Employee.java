@@ -11,7 +11,6 @@ import java.time.Instant;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode(of = {"id"})
-@ToString
 
 @Entity
 @Table(name = "employee")
@@ -35,7 +34,7 @@ public class Employee {
 
     private Instant creationDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Department department;
 
 }
