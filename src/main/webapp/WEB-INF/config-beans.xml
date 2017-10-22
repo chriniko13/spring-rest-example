@@ -27,7 +27,7 @@
     <!-- End: declare your util beans here -->
 
 
-    <!--&lt;!&ndash; Configure to plugin JSON as request and response in method handler &ndash;&gt;-->
+    <!-- Configure to plugin JSON as request and response in method handler -->
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
         <!--<property name="messageConverters">-->
             <!--<list>-->
