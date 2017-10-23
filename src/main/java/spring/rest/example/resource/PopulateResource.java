@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import spring.rest.example.service.PopulateService;
 
 @RestController
-@RequestMapping("/populate")
+@RequestMapping("/resources")
 public class PopulateResource {
 
     private final PopulateService populateService;
@@ -17,7 +17,7 @@ public class PopulateResource {
         this.populateService = populateService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/populate", method = RequestMethod.GET)
     public void init() {
         populateService.populateDepartments();
         populateService.populateEmployees();

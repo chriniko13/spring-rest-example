@@ -44,6 +44,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 
     @Override
     public void delete(Long id) {
-        em.remove(this.get(id));
+        Department department = em.find(Department.class, id);
+        em.remove(department);
     }
 }

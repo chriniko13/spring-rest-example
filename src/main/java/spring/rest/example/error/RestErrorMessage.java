@@ -1,5 +1,4 @@
-package spring.rest.example.exception;
-
+package spring.rest.example.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,11 +8,13 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ServiceException extends RuntimeException {
 
-    private HttpStatus httpStatus;
+public class RestErrorMessage {
+
+    private HttpStatus status;
     private int code;
     private String message;
     private String detailedMessage;
+    private String exceptionMessage;
 
 }

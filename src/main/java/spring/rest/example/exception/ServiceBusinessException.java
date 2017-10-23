@@ -1,19 +1,11 @@
 package spring.rest.example.exception;
 
+import org.springframework.http.HttpStatus;
+
 public class ServiceBusinessException extends ServiceException {
 
-    public ServiceBusinessException() {
+    public ServiceBusinessException(String message, String detailedMessage) {
+        super(HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR.value(), message, detailedMessage);
     }
 
-    public ServiceBusinessException(String message) {
-        super(message);
-    }
-
-    public ServiceBusinessException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public ServiceBusinessException(Throwable cause) {
-        super(cause);
-    }
 }

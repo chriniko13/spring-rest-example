@@ -44,6 +44,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public void delete(Long id) {
-        em.remove(this.get(id));
+        Employee employee = em.find(Employee.class, id);
+        em.remove(employee);
     }
 }
