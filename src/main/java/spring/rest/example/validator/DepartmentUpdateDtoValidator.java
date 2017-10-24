@@ -22,11 +22,12 @@ public class DepartmentUpdateDtoValidator implements Validator<DepartmentUpdateD
 
         String name = data.getName();
         if (name == null || name.isEmpty()) {
-            throw new ServiceValidationException("Deparment name is invalid.", "Provided department name is null or empty.");
+            throw new ServiceValidationException("Department name is invalid.", "Provided department name is null or empty.");
         }
 
         if (!pattern.asPredicate().test(name)) {
-            throw new ServiceValidationException("Department name is invalid.", "Department name should contains only letters[a-zA-Z] and the minimum length should be 5.");
+            throw new ServiceValidationException("Department name is invalid.",
+                    "Department name should contains only letters[a-zA-Z] and the minimum length should be 5.");
         }
 
     }

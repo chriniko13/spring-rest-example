@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import spring.rest.example.domain.Employee;
 
 import javax.persistence.*;
+import java.time.Clock;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Collection;
 
@@ -29,6 +31,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public void save(Employee employee) {
+        employee.setCreationDate(Instant.now(Clock.system(zoneId)));
         em.persist(employee);
     }
 

@@ -1,12 +1,14 @@
 package spring.rest.example.service;
 
 import spring.rest.example.domain.Employee;
+import spring.rest.example.dto.EmployeeInsertDto;
+import spring.rest.example.dto.EmployeeUpdateDto;
 
 import java.util.Collection;
 
 public interface EmployeeService {
 
-    void save(Employee employee);
+    void save(EmployeeInsertDto employee);
 
     Collection<Employee> list();
 
@@ -14,5 +16,5 @@ public interface EmployeeService {
 
     void delete(Long id);
 
-    void update(Employee employee);
+    void update(Long employeeId, EmployeeUpdateDto employee);
 }
