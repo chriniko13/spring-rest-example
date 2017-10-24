@@ -1,5 +1,7 @@
 package spring.rest.example.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -25,18 +27,20 @@ import java.util.List;
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
 
+    private static final Logger logger = LoggerFactory.getLogger(DepartmentServiceImpl.class);
+
     private final DepartmentRepository departmentRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
-    public DepartmentServiceImpl(DepartmentRepository departmentRepository) {
+    public DepartmentServiceImpl(DepartmentRepository departmentRepository, EmployeeRepository employeeRepository) {
         this.departmentRepository = departmentRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
     public void save(DepartmentInsertDto departmentInsertDto) {
+        logger.info("DepartmentServiceImpl#save --- called!");
 
         ensureDepartmentNotExists(departmentInsertDto);
 
@@ -54,16 +58,21 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Collection<Department> list() {
+        logger.info("DepartmentServiceImpl#list --- called!");
+
         return departmentRepository.list();
     }
 
     @Override
     public Department find(Long id) {
+        logger.info("DepartmentServiceImpl#find --- called!");
+
         return ensureDepartmentExists(id);
     }
 
     @Override
     public void update(Long departmentId, DepartmentUpdateDto departmentUpdateDto) {
+        logger.info("DepartmentServiceImpl#update --- called!");
 
         Department department = ensureDepartmentExists(departmentId);
 
@@ -82,6 +91,14 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepository.update(department);
     }
 
+    @Override
+    public void delete(Long id) {
+        logger.info("DepartmentServiceImpl#delete --- called!");
+
+        ensureDepartmentExists(id);
+        departmentRepository.delete(id);
+    }
+
     private void bind(Department department, List<Long> employeeIds) {
         for (Long employeeId : employeeIds) {
 
@@ -93,12 +110,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             employee.setDepartment(department);
             department.getEmployees().add(employee);
         }
-    }
-
-    @Override
-    public void delete(Long id) {
-        ensureDepartmentExists(id);
-        departmentRepository.delete(id);
     }
 
     private void ensureDepartmentNotExists(DepartmentInsertDto departmentInsertDto) {

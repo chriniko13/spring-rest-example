@@ -1,5 +1,7 @@
 package spring.rest.example.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -24,6 +26,9 @@ import java.util.Collection;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceImpl.class);
+
+
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
 
@@ -35,6 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void save(EmployeeInsertDto employeeInsertDto) {
+        logger.info("EmployeeServiceImpl#save --- called!");
 
         String firstname = employeeInsertDto.getFirstname();
         String initials = employeeInsertDto.getInitials();
@@ -52,16 +58,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Collection<Employee> list() {
+        logger.info("EmployeeServiceImpl#list --- called!");
+
         return employeeRepository.list();
     }
 
     @Override
     public Employee find(Long id) {
+        logger.info("EmployeeServiceImpl#find --- called!");
+
         return employeeRepository.get(id);
     }
 
     @Override
     public void delete(Long id) {
+        logger.info("EmployeeServiceImpl#delete --- called!");
+
         Employee employee = ensureEmployeeExists(id);
 
         if (employee.getDepartment() != null) {
@@ -74,6 +86,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void update(Long employeeId, EmployeeUpdateDto employeeUpdateDto) {
+        logger.info("EmployeeServiceImpl#update --- called!");
 
         Employee retrievedEmployee = ensureEmployeeExists(employeeId);
 
