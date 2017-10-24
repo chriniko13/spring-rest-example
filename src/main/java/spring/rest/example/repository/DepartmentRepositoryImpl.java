@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 import spring.rest.example.domain.Department;
 
 import javax.persistence.*;
+import java.time.Clock;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Collection;
 
@@ -29,6 +31,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 
     @Override
     public void save(Department department) {
+        department.setCreationDate(Instant.now(Clock.system(zoneId)));
         em.persist(department);
     }
 
@@ -46,5 +49,18 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     public void delete(Long id) {
         Department department = em.find(Department.class, id);
         em.remove(department);
+    }
+
+    @Override
+    public Department findByName(String name) {
+
+        TypedQuery<Department> namedQuery = em.createNamedQuery("Department.findByName", Department.class);
+        namedQuery.setParameter("name", name);
+
+        try {
+            return namedQuery.getSingleResult();
+        } catch (NoResultException error) {
+            return null;
+        }
     }
 }

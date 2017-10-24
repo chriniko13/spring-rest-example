@@ -18,9 +18,10 @@ import java.util.List;
 @Table(name = "department")
 
 @NamedQueries(
-
-        @NamedQuery(name = "Department.findAll", query = "select d from Department as d")
-
+        value = {
+                @NamedQuery(name = "Department.findAll", query = "select d from Department as d"),
+                @NamedQuery(name = "Department.findByName", query = "select d from Department as d where d.name = :name")
+        }
 )
 
 public class Department {
@@ -29,6 +30,7 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     private Instant creationDate;

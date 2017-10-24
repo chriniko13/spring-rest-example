@@ -11,6 +11,9 @@ import spring.rest.example.service.EmployeeService;
 import java.lang.reflect.Type;
 import java.util.Collection;
 
+/*
+TODO fix this endpoint.
+ */
 @RestController
 @RequestMapping("/resources")
 public class EmployeeResource {

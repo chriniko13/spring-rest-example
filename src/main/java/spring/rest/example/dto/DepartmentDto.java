@@ -1,6 +1,5 @@
 package spring.rest.example.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
@@ -27,6 +26,5 @@ public class DepartmentDto {
     @JsonDeserialize(using = InstantDeserializer.class)
     private Instant creationDate;
 
-    @JsonManagedReference
     private List<EmployeeDto> employees;
 }
