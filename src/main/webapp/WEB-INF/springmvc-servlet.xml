@@ -5,9 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
     <import resource="config-beans.xml"/>
 
     <import resource="config-data.xml"/>
+
+    <import resource="config-aop.xml"/>
 
 </beans>

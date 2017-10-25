@@ -31,6 +31,34 @@
 
     <dependencies>
 
+        <!-- Spring Context Support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.3.12.RELEASE</version>
+        </dependency>
+
+        <!-- Spring Aop -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>4.3.12.RELEASE</version>
+        </dependency>
+
+        <!-- Aspectj Runtime -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.12</version>
+        </dependency>
+
+        <!-- Aspectj Weaver -->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.12</version>
+        </dependency>
+
         <!-- logback-classic module -->
         <dependency>
             <groupId>ch.qos.logback</groupId>

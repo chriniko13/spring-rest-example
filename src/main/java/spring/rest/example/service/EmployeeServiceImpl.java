@@ -11,6 +11,7 @@ import spring.rest.example.domain.Department;
 import spring.rest.example.domain.Employee;
 import spring.rest.example.dto.EmployeeInsertDto;
 import spring.rest.example.dto.EmployeeUpdateDto;
+import spring.rest.example.exception.ServiceBusinessException;
 import spring.rest.example.exception.ServiceValidationException;
 import spring.rest.example.repository.DepartmentRepository;
 import spring.rest.example.repository.EmployeeRepository;
@@ -20,7 +21,8 @@ import java.util.Collection;
 
 @Transactional(
         propagation = Propagation.REQUIRES_NEW,
-        isolation = Isolation.REPEATABLE_READ
+        isolation = Isolation.REPEATABLE_READ,
+        rollbackFor = {ServiceBusinessException.class}
 )
 
 @Service

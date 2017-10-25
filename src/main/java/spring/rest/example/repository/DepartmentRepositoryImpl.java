@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import spring.rest.example.domain.Department;
+import spring.rest.example.repository.handler.RepositoryErrorHandling;
 
 import javax.persistence.*;
 import java.time.Clock;
@@ -12,6 +13,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Collection;
 
+@RepositoryErrorHandling
 @Repository
 public class DepartmentRepositoryImpl implements DepartmentRepository {
 
