@@ -27,34 +27,45 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
 
     @Override
     public Collection<Department> list() {
+        logger.info("DepartmentRepositoryImpl#list --- called!");
+
         TypedQuery<Department> namedQuery = em.createNamedQuery("Department.findAll", Department.class);
         return namedQuery.getResultList();
     }
 
     @Override
     public void save(Department department) {
+        logger.info("DepartmentRepositoryImpl#save --- called!");
+
         department.setCreationDate(Instant.now(Clock.system(zoneId)));
         em.persist(department);
     }
 
     @Override
     public Department get(Long id) {
+        logger.info("DepartmentRepositoryImpl#get --- called!");
+
         return em.find(Department.class, id);
     }
 
     @Override
     public void update(Department department) {
+        logger.info("DepartmentRepositoryImpl#update --- called!");
+
         em.merge(department);
     }
 
     @Override
     public void delete(Long id) {
+        logger.info("DepartmentRepositoryImpl#delete --- called!");
+
         Department department = em.find(Department.class, id);
         em.remove(department);
     }
 
     @Override
     public Department findByName(String name) {
+        logger.info("DepartmentRepositoryImpl#findByName --- called!");
 
         TypedQuery<Department> namedQuery = em.createNamedQuery("Department.findByName", Department.class);
         namedQuery.setParameter("name", name);

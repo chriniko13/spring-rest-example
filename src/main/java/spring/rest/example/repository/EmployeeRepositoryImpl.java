@@ -27,28 +27,38 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
     @Override
     public Collection<Employee> list() {
+        logger.info("EmployeeRepositoryImpl#list --- called!");
+
         TypedQuery<Employee> namedQuery = em.createNamedQuery("Employee.findAll", Employee.class);
         return namedQuery.getResultList();
     }
 
     @Override
     public void save(Employee employee) {
+        logger.info("EmployeeRepositoryImpl#save --- called!");
+
         employee.setCreationDate(Instant.now(Clock.system(zoneId)));
         em.persist(employee);
     }
 
     @Override
     public Employee get(Long id) {
+        logger.info("EmployeeRepositoryImpl#get --- called!");
+
         return em.find(Employee.class, id);
     }
 
     @Override
     public void update(Employee employee) {
+        logger.info("EmployeeRepositoryImpl#update --- called!");
+
         em.merge(employee);
     }
 
     @Override
     public void delete(Long id) {
+        logger.info("EmployeeRepositoryImpl#delete --- called!");
+
         Employee employee = em.find(Employee.class, id);
         em.remove(employee);
     }

@@ -28,9 +28,7 @@ public class RepositoryErrorHandler {
 
         // Note: default error transformer...
         errorTransformers.put(error -> true, error -> new ServiceBusinessException(error.getMessage(), null, error));
-
     }
-
 
     @Around("within(@spring.rest.example.repository.handler.RepositoryErrorHandling *)")
     public Object handle(ProceedingJoinPoint joinPoint) throws Throwable {
@@ -40,10 +38,9 @@ public class RepositoryErrorHandler {
         logger.info("RepositoryErrorHandler#handle() --- hijacked arguments : " + Arrays.toString(joinPoint.getArgs()));
 
         try {
-
             logger.info("RepositoryErrorHandler#handle() --- Around before is running!");
 
-            Object proceed = joinPoint.proceed();//continue on the intercepted method
+            Object proceed = joinPoint.proceed();
 
             logger.info("RepositoryErrorHandler#handle() --- Around after is running!");
 
@@ -60,7 +57,6 @@ public class RepositoryErrorHandler {
                     .get()
                     .getValue()
                     .apply(error);
-
         }
     }
 
